@@ -58,26 +58,36 @@ class Router
      * @param string $uri
      * @param string $requestType
      */
-    public function direct($uri, $requestType)
+   public function direct($uri, $requestType)
     {
-        if (array_key_exists($uri, $this->routes[$requestType])) {
-            $controllerAction = explode('@', $this->routes[$requestType][$uri]);
-            $controllerName = "App\\Controllers\\{$controllerAction[0]}";
-            $action = $controllerAction[1];
+        // ...
 
-            $controller = new $controllerName;
+        // Check if the URI matches the defined routes
+        foreach ($this->routes[$requestType] as $route => $controller) {
+            // Convert route placeholders to regular expressions
+            $pattern = '#^' . preg_replace('#\{([\w]+)\}#', '([\w-]+)', $route) . '$#';
 
-            if (!method_exists($controller, $action)) {
-                throw new Exception(
-                    "{$controllerName} does not respond to the {$action} action."
-                );
+            if (preg_match($pattern, $uri, $matches)) {
+                $controllerAction = explode('@', $controller);
+                $controllerName = "App\\Controllers\\{$controllerAction[0]}";
+                $action = $controllerAction[1];
+
+                $controller = new $controllerName;
+
+                if (!method_exists($controller, $action)) {
+                    throw new Exception(
+                        "{$controllerName} does not respond to the {$action} action."
+                    );
+                }
+
+                // Pass the matched route parameters to the controller method
+                $params = array_slice($matches, 1);
+                $response = $controller->$action(...$params);
+
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
             }
-
-            $response = $controller->$action();
-
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            return;
         }
 
         throw new Exception('No route defined for this URI.');

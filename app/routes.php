@@ -1,23 +1,15 @@
 <?php
 
-// $router->get('', 'PagesController@home');
-// $router->get('about', 'PagesController@about');
-// $router->get('contact', 'PagesController@contact');
+
 
 $router->get('users', 'UserController@index');
 $router->post('users', 'UserController@store');
-// $router->put('users/{id}', 'UserController@update');
-// $router->delete('users/{id}', 'UserController@delete');
+$router->post('users/{id}/update', 'UserController@update');
+$router->post('users/{id}/delete', 'UserController@delete');
 
 
+$router->get('clothes', 'ClothController@index');
+$router->post('clothes', 'ClothController@store');
+$router->post('clothes/{id}/update', 'ClothController@update');
+$router->post('clothes/{id}/delete', 'ClothController@delete');
 
-
-
-// // Import the necessary classes
-// use App\Controllers\UserController;
-
-// // Define your routes
-// $router->get('users', [UserController::class, 'index']);
-// $router->post('users', [UserController::class, 'store']);
-// $router->put('users/{id}', [UserController::class, 'update']);
-// $router->delete('users/{id}', [UserController::class, 'delete']);

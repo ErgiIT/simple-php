@@ -11,6 +11,7 @@ class ComposerStaticInit5c65d03ad5e7c7dc913cc88a3ab4307c
     );
 
     public static $classMap = array (
+        'App\\Controllers\\ClothController' => __DIR__ . '/../..' . '/app/controllers/ClothController.php',
         'App\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/controllers/UserController.php',
         'App\\Core\\App' => __DIR__ . '/../..' . '/core/App.php',
         'App\\Core\\Database\\Connection' => __DIR__ . '/../..' . '/core/database/Connection.php',
@@ -19,6 +20,7 @@ class ComposerStaticInit5c65d03ad5e7c7dc913cc88a3ab4307c
         'App\\Core\\Router' => __DIR__ . '/../..' . '/core/Router.php',
         'App\\Models\\Cloth' => __DIR__ . '/../..' . '/app/models/Cloth.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/models/User.php',
+        'App\\Repositories\\ClothesRepository' => __DIR__ . '/../..' . '/app/repositories/ClothesRepository.php',
         'App\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/repositories/UserRepository.php',
         'ComposerAutoloaderInit5c65d03ad5e7c7dc913cc88a3ab4307c' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',

@@ -2,6 +2,7 @@
 
 namespace App\Core\Database;
 
+use Exception;
 use PDO;
 
 class QueryBuilder
@@ -56,8 +57,56 @@ class QueryBuilder
             $statement = $this->pdo->prepare($sql);
 
             $statement->execute($parameters);
-        } catch (\Exception $e) {
-            //
+        } catch (Exception $e) {
+            throw new Exception("Error inserting data into {$table}: " . $e->getMessage());        }
+    }
+    /**
+     * Update a record in a table.
+     *
+     * @param  string $table
+     * @param  int    $id
+     * @param  array  $parameters
+     */
+    public function update($table, $id, $parameters)
+    {
+        $columns = array_map(function ($column) {
+            return $column . ' = :' . $column;
+        }, array_keys($parameters));
+
+        $sql = sprintf(
+            'UPDATE %s SET %s WHERE id = :id',
+            $table,
+            implode(', ', $columns)
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+
+            $statement->execute(array_merge($parameters, ['id' => $id]));
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
+    }
+
+    /**
+     * Delete a record from a table.
+     *
+     * @param  string $table
+     * @param  int    $id
+     */
+    public function delete($table, $id)
+    {
+        $sql = sprintf(
+            'DELETE FROM %s WHERE id = :id',
+            $table
+        );
+
+        try {
+            $statement = $this->pdo->prepare($sql);
+
+            $statement->execute(['id' => $id]);
+        } catch (Exception $e) {
+            $e->getMessage();
         }
     }
 }
