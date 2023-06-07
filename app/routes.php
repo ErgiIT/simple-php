@@ -13,3 +13,5 @@ $router->post('clothes', 'ClothController@store');
 $router->post('clothes/{id}/update', 'ClothController@update');
 $router->post('clothes/{id}/delete', 'ClothController@delete');
 
+$router->post('buy', 'PurchaseController@buy');
+$router->post('user-clothes', 'PurchaseController@getUserClothes');

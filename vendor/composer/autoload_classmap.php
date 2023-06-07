@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Controllers\\ClothController' => $baseDir . '/app/controllers/ClothController.php',
+    'App\\Controllers\\PurchaseController' => $baseDir . '/app/controllers/PurchaseController.php',
     'App\\Controllers\\UserController' => $baseDir . '/app/controllers/UserController.php',
     'App\\Core\\App' => $baseDir . '/core/App.php',
     'App\\Core\\Database\\Connection' => $baseDir . '/core/database/Connection.php',
@@ -14,6 +15,7 @@ return array(
     'App\\Core\\Request' => $baseDir . '/core/Request.php',
     'App\\Core\\Router' => $baseDir . '/core/Router.php',
     'App\\Models\\Cloth' => $baseDir . '/app/models/Cloth.php',
+    'App\\Models\\ClothUser' => $baseDir . '/app/models/ClothUser.php',
     'App\\Models\\User' => $baseDir . '/app/models/User.php',
     'App\\Repositories\\ClothesRepository' => $baseDir . '/app/repositories/ClothesRepository.php',
     'App\\Repositories\\UserRepository' => $baseDir . '/app/repositories/UserRepository.php',
