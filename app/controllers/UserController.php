@@ -14,51 +14,28 @@ class UserController
         return $users;
     }
 
-    /**
-     * Store a new user in the database.
-     */
-    public function store()
-    {
-        $user = new User();
-        $user->name = $_POST['name'];
-        $user->email = $_POST['email'];
-        $user->phone = $_POST['phone'];
-        $user->weight = $_POST['weight'];
+    public function upsert($id = null){
+        $data = [
+            'name' => $_REQUEST['name'],
+            'email' => $_REQUEST['email'],
+            'phone' => $_REQUEST['phone'],
+            'weight' => $_REQUEST['weight']
+        ];
 
-        // Save the user to the database
-        App::get('database')->insert('users', [
-            'name' => $user->name,
-            'email' => $user->email,
-            'phone' => $user->phone,
-            'weight' => $user->weight,
-        ]);
+        $user = new User();
+
+        foreach ($data as $key => $value){
+            $user->$key = $value;
+        }
+       
+        if (isset($id)){
+            App::get('database')->update('users', $id, $data);
+        } else {
+            App::get('database')->insert('users', $data);
+        }
 
         return $user;
     }
-    /**
-     * Update a user in the database.
-     *
-     * @param int $id
-     */
-    public function update($id)
-    {
-        $user = new User();
-        $user->name = $_POST['name'] ?? '';
-        $user->email = $_POST['email'] ?? '';
-        $user->phone = $_POST['phone'] ?? '';
-        $user->weight = $_POST['weight'] ?? '';
-
-         // Update the user in the database
-        App::get('database')->update('users', $id, [
-            'name' => $user->name,
-            'email' => $user->email,
-            'phone' => $user->phone,
-            'weight' => $user->weight,
-        ]);
-
-        return $user;
-    }
-
     /**
      * Delete a user from the database.
      *

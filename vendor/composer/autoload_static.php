@@ -6,10 +6,6 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit5c65d03ad5e7c7dc913cc88a3ab4307c
 {
-    public static $files = array (
-        '5ec26a44593cffc3089bdca7ce7a56c3' => __DIR__ . '/../..' . '/core/helpers.php',
-    );
-
     public static $classMap = array (
         'App\\Controllers\\ClothController' => __DIR__ . '/../..' . '/app/controllers/ClothController.php',
         'App\\Controllers\\PurchaseController' => __DIR__ . '/../..' . '/app/controllers/PurchaseController.php',
