@@ -17,6 +17,7 @@ class ComposerStaticInit5c65d03ad5e7c7dc913cc88a3ab4307c
         'App\\Core\\Router' => __DIR__ . '/../..' . '/core/Router.php',
         'App\\Models\\Cloth' => __DIR__ . '/../..' . '/app/models/Cloth.php',
         'App\\Models\\ClothUser' => __DIR__ . '/../..' . '/app/models/ClothUser.php',
+        'App\\Models\\Model' => __DIR__ . '/../..' . '/app/models/Model.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/models/User.php',
         'App\\Repositories\\ClothesRepository' => __DIR__ . '/../..' . '/app/repositories/ClothesRepository.php',
         'App\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/repositories/UserRepository.php',

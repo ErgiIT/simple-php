@@ -2,16 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Core\App;
 use App\Models\Cloth;
+use Exception;
 
 class ClothController
 {
     public function index()
     {
-        $clothes = App::get('database')->selectAll('clothes');
-
-        return $clothes;
+       return Cloth::get();
     }
     
     public function upsert($id = null){
@@ -32,9 +30,9 @@ class ClothController
         }
        
         if (isset($id)){
-            App::get('database')->update('clothes', $id, $data);
+            Cloth::update($id, $data);
         } else {
-            App::get('database')->insert('clothes', $data);
+            Cloth::create($data);
         }
 
         return $user;
@@ -42,9 +40,10 @@ class ClothController
 
     public function delete($id)
     {
-        // Delete the cloth from the database
-        App::get('database')->delete('clothes', $id);
-
-        return ['message' => 'Cloth deleted successfully'];
+        try{
+            Cloth::delete($id);
+       }catch(Exception $e){
+            $e->getMessage();
+       }
     }
 }

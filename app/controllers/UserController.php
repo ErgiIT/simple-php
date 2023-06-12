@@ -3,15 +3,15 @@
 namespace App\Controllers;
 
 use App\Core\App;
+use App\Models\Model;
 use App\Models\User;
+use Exception;
 
 class UserController
 {
     public function index()
     {
-        $users = App::get('database')->selectAll('users');
-
-        return $users;
+       return User::get();
     }
 
     public function upsert($id = null){
@@ -29,24 +29,22 @@ class UserController
         }
        
         if (isset($id)){
-            App::get('database')->update('users', $id, $data);
+            User::update($id, $data);
         } else {
-            App::get('database')->insert('users', $data);
+           User::create($data);
         }
 
         return $user;
     }
-    /**
-     * Delete a user from the database.
-     *
-     * @param int $id
-     */
+
     public function delete($id)
     {
-        // Delete the user from the database
-        App::get('database')->delete('users', $id);
+       try{
+            User::delete($id);
+       }catch(Exception $e){
+            $e->getMessage();
+       }
 
-        return 'User deleted successfully';
     }
 }
 

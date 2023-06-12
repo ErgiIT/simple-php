@@ -2,11 +2,17 @@
 
 namespace App\Controllers;
 
-use App\Core\App;
+use App\Models\Cloth;
 use App\Models\ClothUser;
+use Exception;
 
 class PurchaseController
 {
+    public function index()
+    {
+        return ClothUser::get();
+    }
+
     public function buy()
     {
         $userId = $_POST['user_id'];
@@ -14,32 +20,22 @@ class PurchaseController
         $quantity = $_POST['quantity'];
 
         // Retrieve the cloth from the database
-        $cloth = App::get('database')->selectById('clothes', $clothId);
+        $cloth = Cloth::find($clothId);
 
         if ($cloth) {
             // Check if the requested quantity is available
             if ($cloth->quantity >= $quantity) {
-                // Create a new ClothUser record
-                $clothUser = new ClothUser();
-                $clothUser->user_id = $userId;
-                $clothUser->cloth_id = $clothId;
-                $clothUser->quantity = $quantity;
+                $data = [
+                    'user_id' => $userId,
+                    'cloth_id' => $clothId,
+                    'quantity' => $quantity
+                ];
 
-                // Save the ClothUser record to the database
-                App::get('database')->insert('cloth_user', [
-                    'user_id' => $clothUser->user_id,
-                    'cloth_id' => $clothUser->cloth_id,
-                    'quantity' => $clothUser->quantity
-                ]);
+                ClothUser::create($data);
 
-                // Update the quantity of the cloth in the clothes table
                 $newQuantity = $cloth->quantity - $quantity;
-                App::get('database')->update('clothes', $clothId, ['quantity' => $newQuantity]);
+                Cloth::update($clothId, ['quantity' => $newQuantity]);
 
-                // Retrieve all the clothes owned by the user
-                $userClothes = App::get('database')->select('cloth_user', ['user_id' => $userId]);
-
-                return $userClothes;
             } else {
                 return ['message' => 'Insufficient quantity available.'];
             }
@@ -48,13 +44,18 @@ class PurchaseController
         }
     }
 
-    public function getUserClothes()
+    public function delete($id)
     {
-        $userId = $_POST['user_id'];
+        ClothUser::delete($id);
+        echo "Record deleted";
+    }
 
-        // Retrieve all the clothes owned by the user
-        $userClothes = App::get('database')->select('cloth_user', ['user_id' => $userId]);
-
-        return $userClothes;
+    public function select($id)
+    {
+        try {
+            return ClothUser::find(['user_id' => $id]);
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }
