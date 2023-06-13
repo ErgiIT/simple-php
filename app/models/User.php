@@ -15,9 +15,4 @@ class User extends Model
     protected static function getTable() {
         return self::TABLE;
     }
-
-    public function __get($var)
-    {
-        throw new Exception("Invalid property $var");
-    }
 }

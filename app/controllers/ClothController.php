@@ -2,54 +2,46 @@
 
 namespace App\Controllers;
 
-use App\Models\Cloth;
+use App\Repositories\ClothesRepository;
 use Exception;
 
 class ClothController
 {
     public function index()
     {
-       return Cloth::get();
+        try{
+            return ClothesRepository::get();
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+        
     }
     
     public function upsert($id = null){
-        $data = [
-            'title' => $_REQUEST['title'],
-            'description' => $_REQUEST['description'],
-            'size' => $_REQUEST['size'],
-            'price' => $_REQUEST['price'],
-            'quantity' => $_REQUEST['quantity'],
-            'currency' => $_REQUEST['currency'],
-            'type' => $_REQUEST['type']
-        ];
-
-        $user = new Cloth();
-
-        foreach ($data as $key => $value){
-            $user->$key = $value;
+        try{
+            return ClothesRepository::upsert($id);
+        }catch(Exception $e){
+            $e->getMessage();
         }
-       
-        if (isset($id)){
-            Cloth::update($id, $data);
-        } else {
-            Cloth::create($data);
-        }
-
-        return $user;
     }
 
     public function delete($id)
     {
         try{
-            Cloth::delete($id);
-       }catch(Exception $e){
+            return ClothesRepository::delete($id);
+        }catch(Exception $e){
             $e->getMessage();
-       }
+        }
     }
 
     public function findByType($type)
     {
-        return Cloth::where('type', $type);
+        try{
+            return ClothesRepository::find($type);
+        }catch(Exception $e){
+            $e->getMessage();
+        }
+        
     }
 
 }

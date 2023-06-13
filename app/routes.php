@@ -17,4 +17,4 @@ $router->get('clothes/{type}', 'ClothController@findByType');
 $router->get('buy', 'PurchaseController@index');
 $router->post('buy', 'PurchaseController@buy');
 $router->post('buy/{id}/delete', 'PurchaseController@delete');
-$router->post('buy/{id}', 'PurchaseController@select');
+$router->get('buy/{id}', 'PurchaseController@select');
