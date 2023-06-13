@@ -10,6 +10,8 @@ $router->get('clothes', 'ClothController@index');
 $router->post('clothes', 'ClothController@upsert');
 $router->post('clothes/{id}', 'ClothController@upsert');
 $router->post('clothes/{id}/delete', 'ClothController@delete');
+$router->get('clothes/{type}', 'ClothController@findByType');
+
 
 
 $router->get('buy', 'PurchaseController@index');

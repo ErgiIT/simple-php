@@ -46,4 +46,10 @@ class ClothController
             $e->getMessage();
        }
     }
+
+    public function findByType($type)
+    {
+        return Cloth::where('type', $type);
+    }
+
 }
