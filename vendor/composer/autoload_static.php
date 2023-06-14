@@ -22,6 +22,8 @@ class ComposerStaticInit5c65d03ad5e7c7dc913cc88a3ab4307c
         'App\\Repositories\\ClothesRepository' => __DIR__ . '/../..' . '/app/Repositories/ClothesRepository.php',
         'App\\Repositories\\PurchaseRepository' => __DIR__ . '/../..' . '/app/Repositories/PurchaseRepository.php',
         'App\\Repositories\\UserRepository' => __DIR__ . '/../..' . '/app/Repositories/UserRepository.php',
+        'App\\Requests\\ClothUpsert' => __DIR__ . '/../..' . '/app/Requests/ClothUpsert.php',
+        'App\\Requests\\UserUpsert' => __DIR__ . '/../..' . '/app/Requests/UserUpsert.php',
         'ComposerAutoloaderInit5c65d03ad5e7c7dc913cc88a3ab4307c' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
         'Composer\\Autoload\\ComposerStaticInit5c65d03ad5e7c7dc913cc88a3ab4307c' => __DIR__ . '/..' . '/composer/autoload_static.php',

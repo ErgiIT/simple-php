@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use App\Requests\UserUpsert;
 
 class UserRepository
 {
@@ -12,6 +13,9 @@ class UserRepository
     }
 
     public static function upsert($id = null){
+
+        UserUpsert::upsertValidation();
+
         $data = [
             'name' => $_REQUEST['name'],
             'email' => $_REQUEST['email'],

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Cloth;
+use App\Requests\ClothUpsert;
 
 class ClothesRepository
 {
@@ -12,6 +13,9 @@ class ClothesRepository
     }
     
     public static function upsert($id = null){
+
+        ClothUpsert::upsertValidation();
+
         $data = [
             'title' => $_REQUEST['title'],
             'description' => $_REQUEST['description'],

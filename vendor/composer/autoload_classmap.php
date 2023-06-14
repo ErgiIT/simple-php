@@ -21,6 +21,8 @@ return array(
     'App\\Repositories\\ClothesRepository' => $baseDir . '/app/Repositories/ClothesRepository.php',
     'App\\Repositories\\PurchaseRepository' => $baseDir . '/app/Repositories/PurchaseRepository.php',
     'App\\Repositories\\UserRepository' => $baseDir . '/app/Repositories/UserRepository.php',
+    'App\\Requests\\ClothUpsert' => $baseDir . '/app/Requests/ClothUpsert.php',
+    'App\\Requests\\UserUpsert' => $baseDir . '/app/Requests/UserUpsert.php',
     'ComposerAutoloaderInit5c65d03ad5e7c7dc913cc88a3ab4307c' => $vendorDir . '/composer/autoload_real.php',
     'Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
     'Composer\\Autoload\\ComposerStaticInit5c65d03ad5e7c7dc913cc88a3ab4307c' => $vendorDir . '/composer/autoload_static.php',
